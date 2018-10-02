@@ -52,6 +52,7 @@ def mean_confidence_interval(data, confidence=0.95):
     h = se * sp.stats.t._ppf((1+confidence)/2., n-1)
     return m,h
 
+### define a class to perform some methods.
 class CNNEncoder(nn.Module):
     """docstring for ClassName"""
     def __init__(self):
@@ -132,9 +133,10 @@ def main():
     # Step 2: init neural networks
     print("init neural networks")
 
+    ### instantiation
     feature_encoder = CNNEncoder()
     relation_network = RelationNetwork(FEATURE_DIM,RELATION_DIM)
-
+    ### use member function to load a module to take conductions.
     feature_encoder.apply(weights_init)
     relation_network.apply(weights_init)
 
@@ -159,7 +161,7 @@ def main():
     last_accuracy = 0.0
 
     for episode in range(EPISODE):
-
+        ### ???
         feature_encoder_scheduler.step(episode)
         relation_network_scheduler.step(episode)
 
