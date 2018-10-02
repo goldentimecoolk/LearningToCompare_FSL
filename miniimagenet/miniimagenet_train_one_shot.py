@@ -136,7 +136,7 @@ def main():
     ### instantiation
     feature_encoder = CNNEncoder()
     relation_network = RelationNetwork(FEATURE_DIM,RELATION_DIM)
-    ### use member function to load a module to take conductions.
+    ### use member function to load a module, which means to take some functions.
     feature_encoder.apply(weights_init)
     relation_network.apply(weights_init)
 
@@ -161,7 +161,7 @@ def main():
     last_accuracy = 0.0
 
     for episode in range(EPISODE):
-        ### ???
+        ### Sets the learning rate of each parameter group to the initial lr decayed by gamma every step_size epochs.
         feature_encoder_scheduler.step(episode)
         relation_network_scheduler.step(episode)
 
@@ -192,7 +192,9 @@ def main():
         mse = nn.MSELoss().cuda(GPU)
         one_hot_labels = Variable(torch.zeros(BATCH_NUM_PER_CLASS*CLASS_NUM, CLASS_NUM).scatter_(1, batch_labels.view(-1,1), 1)).cuda(GPU)
         loss = mse(relations,one_hot_labels)
-
+### 变量的含义，根据论文设计的算法确定；in the hyper parameters section.
+### 代码的由粗到细，模块化，数据流，shape；常用操作的组合，刚开始很需要耐心，弄清每个细节，这是代码部分的基础，如果想要建造一颗参天大树，就得从这里开始。
+### 关键部分的改进和实现。
 
         # training
 
