@@ -58,6 +58,7 @@ class CNNEncoder(nn.Module):
     def __init__(self):
         super(CNNEncoder, self).__init__()
         self.layer1 = nn.Sequential(
+                        ### (in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True)
                         nn.Conv2d(3,64,kernel_size=3,padding=0),
                         nn.BatchNorm2d(64, momentum=1, affine=True),
                         nn.ReLU(),
