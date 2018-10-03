@@ -120,6 +120,7 @@ class ClassBalancedSampler(Sampler):
 
     def __iter__(self):
         # return a single list of indices, assuming that items will be grouped by class
+        ### every iteration returns a batch, with the shape of [min(num_inst,num_per_class),num_cl]
         if self.shuffle:
             batch = [[i+j*self.num_inst for i in torch.randperm(self.num_inst)[:self.num_per_class]] for j in range(self.num_cl)]
         else:
