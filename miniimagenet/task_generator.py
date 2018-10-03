@@ -118,9 +118,9 @@ class ClassBalancedSampler(Sampler):
         self.num_inst = num_inst
         self.shuffle = shuffle
 
+    ### every iteration returns a batch, with the shape of [min(num_inst,num_per_class),num_cl]
     def __iter__(self):
         # return a single list of indices, assuming that items will be grouped by class
-        ### every iteration returns a batch, with the shape of [min(num_inst,num_per_class),num_cl]
         if self.shuffle:
             batch = [[i+j*self.num_inst for i in torch.randperm(self.num_inst)[:self.num_per_class]] for j in range(self.num_cl)]
         else:
@@ -145,6 +145,7 @@ def get_mini_imagenet_data_loader(task, num_per_class=1, split='train',shuffle =
     else:
         sampler = ClassBalancedSampler(num_per_class, task.num_classes, task.test_num,shuffle=shuffle)
 
+    ### how many samples per batch to load (default: 1)
     loader = DataLoader(dataset, batch_size=num_per_class*task.num_classes, sampler=sampler)
 
     return loader
