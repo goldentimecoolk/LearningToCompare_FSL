@@ -61,12 +61,14 @@ class CNNEncoder(nn.Module):
                         nn.Conv2d(3,64,kernel_size=3,padding=0),
                         nn.BatchNorm2d(64, momentum=1, affine=True),
                         nn.ReLU(),
-                        nn.MaxPool2d(2))
+                        nn.MaxPool2d(2))       ### kernel_size – the size of the window to take a max over
+                                               ### stride – the stride of the window. Default value is kernel_size
         self.layer2 = nn.Sequential(
                         nn.Conv2d(64,64,kernel_size=3,padding=0),
                         nn.BatchNorm2d(64, momentum=1, affine=True),
                         nn.ReLU(),
-                        nn.MaxPool2d(2))
+                        nn.MaxPool2d(2))       ### kernel_size – the size of the window to take a max over
+                                               ### stride – the stride of the window. Default value is kernel_size
         self.layer3 = nn.Sequential(
                         nn.Conv2d(64,64,kernel_size=3,padding=1),
                         nn.BatchNorm2d(64, momentum=1, affine=True),
